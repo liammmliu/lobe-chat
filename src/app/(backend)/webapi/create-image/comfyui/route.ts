@@ -6,7 +6,10 @@ import { createCallerFactory } from '@/libs/trpc/lambda';
 import { lambdaRouter } from '@/server/routers/lambda';
 
 export const runtime = 'nodejs';
-export const maxDuration = 300;
+// Vercel Hobby plan serverless maxDuration must be between 1-60 seconds.
+// ComfyUI image generation can be long-running; for Hobby plan, keep at 60.
+// Consider upgrading plan or offloading long tasks to a persistent service.
+export const maxDuration = 60;
 
 const serverDBEnv = getServerDBConfig();
 
