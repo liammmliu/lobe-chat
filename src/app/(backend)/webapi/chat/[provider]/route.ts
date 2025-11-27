@@ -11,7 +11,9 @@ import { ChatStreamPayload } from '@/types/openai/chat';
 import { createErrorResponse } from '@/utils/errorResponse';
 import { getTracePayload } from '@/utils/trace';
 
-export const maxDuration = 300;
+// Vercel Hobby plan serverless maxDuration must be between 1-60 seconds.
+// Streaming chat responses should finish well within this; adjust if upgrading plan.
+export const maxDuration = 60;
 
 export const POST = checkAuth(async (req: Request, { params, jwtPayload, createRuntime }) => {
   const { provider } = await params;
